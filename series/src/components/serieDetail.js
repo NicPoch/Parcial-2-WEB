@@ -1,12 +1,13 @@
 import React,{useState} from 'react';
 import { Card } from 'react-bootstrap';
+import { FormattedMessage} from "react-intl";
 
 const SerieDetail=(props)=>{
     const [state, setstate] = useState(props.info);
     return(
         <Card>
             <Card.Body>
-                <Card.Img variant="top" src={state.poster} />
+                {(navigator.onLine) ? <Card.Img variant="top" src={state.poster} />:<FormattedMessage id="Error Loading Image"/>}
                 <Card.Title>
                     {state.name}
                 </Card.Title>
