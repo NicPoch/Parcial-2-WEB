@@ -100,7 +100,6 @@ const Series=()=>{
     const renderDetail=()=>{
         if(onDetail)
         {
-            console.log(onDetail);
             return(
                 <Col>
                     <SerieDetail info={onDetail}/>
