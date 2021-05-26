@@ -5,7 +5,6 @@ const SerieDetail=(props)=>{
     const [state, setstate] = useState(props.info);
     return(
         <Card>
-            {console.log(state)}
             <Card.Body>
                 <Card.Img variant="top" src={state.poster} />
                 <Card.Title>

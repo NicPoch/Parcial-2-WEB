@@ -4,11 +4,13 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {IntlProvider} from "react-intl";
+import localeEsMessages from "./locales/es.json";
+import localeEnMessages from "./locales/en.json";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <IntlProvider locale="en">
+    <IntlProvider locale={window.navigator.language} messages={(window.navigator.language==="en") ? localeEnMessages : localeEsMessages}>
       <App />
     </IntlProvider>
   </React.StrictMode>,

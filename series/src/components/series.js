@@ -1,6 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import SerieDetail from "./serieDetail";
+import { FormattedMessage } from "react-intl";
 import * as d3 from "d3";
 
 const Series=()=>{
@@ -59,6 +60,21 @@ const Series=()=>{
         g.append("g")
         .classed("y--axis", true)
         .call(d3.axisLeft(y));
+
+        g.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", iwidth)
+        .attr("y", iheight-4)
+        .text((window.navigator.language==="en") ? "Episodes" : "Episodios");
+
+        g.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text((window.navigator.language==="en") ? "Seasons" : "Temporadas");
     };
 
     useEffect(() => {
@@ -101,42 +117,59 @@ const Series=()=>{
         setting.then(ans=>setonDetail(ans));
     };
 
-    return(
-        <div>
-            <Row>
-                <Col>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Channel</th>
-                                <th>Seasons</th>
-                                <th>Episodes</th>
-                                <th>Release Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {series.map(s=>(
-                                <tr onClick={()=>(!onDetail || onDetail.id!==s.id) ? toDetail(s):setonDetail(null)}>
-                                    <td>{s.id}</td>
-                                    <td>{s.name}</td>
-                                    <td>{s.channel}</td>
-                                    <td>{s.seasons}</td>
-                                    <td>{s.episodes}</td>
-                                    <td>{s.release}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </Col>
-                {renderDetail()}
-            </Row>
-            <Row>
-                <div ref={canvas}></div>
-            </Row>
-        </div>
-    );
+    const render=()=>{
+        if(series.length===0)
+        {
+            return(
+                <Row>
+                    <Col>
+                        <FormattedMessage id="Loading"/>... :( 
+                    </Col>
+                </Row>
+            );
+        }
+        else
+        {
+            return(
+                <div>
+                    <Row>
+                        <Col>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col"><FormattedMessage id="Name"/></th>
+                                        <th scope="col"><FormattedMessage id="Channel"/></th>
+                                        <th scope="col"><FormattedMessage id="Seasons"/></th>
+                                        <th scope="col"><FormattedMessage id="Episodes"/></th>
+                                        <th scope="col"><FormattedMessage id="Release Date"/></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {series.map(s=>(
+                                        <tr onClick={()=>(!onDetail || onDetail.id!==s.id) ? toDetail(s):setonDetail(null)}>
+                                            <td>{s.id}</td>
+                                            <td>{s.name}</td>
+                                            <td>{s.channel}</td>
+                                            <td>{s.seasons}</td>
+                                            <td>{s.episodes}</td>
+                                            <td>{s.release}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                        {renderDetail()}
+                    </Row>
+                    <Row>
+                        <div ref={canvas}></div>
+                    </Row>
+                </div>
+            );
+        }
+    };
+
+    return render();
 };
 
 export default Series;
