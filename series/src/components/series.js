@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table, Jumbotron, Container } from 'react-bootstrap';
 import SerieDetail from "./serieDetail";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedDate } from "react-intl";
 import * as d3 from "d3";
 
 const Series=()=>{
@@ -121,11 +121,11 @@ const Series=()=>{
         if(series.length===0)
         {
             return(
-                <Row>
-                    <Col>
-                        <FormattedMessage id="Loading"/>... :( 
-                    </Col>
-                </Row>
+                <Jumbotron fluid>
+                    <Container>
+                        <h1><FormattedMessage id="Loading"/>... :( </h1>
+                    </Container>
+                </Jumbotron>
             );
         }
         else
@@ -153,7 +153,9 @@ const Series=()=>{
                                             <td>{s.channel}</td>
                                             <td>{s.seasons}</td>
                                             <td>{s.episodes}</td>
-                                            <td>{s.release}</td>
+                                            {/*<td>{s.release}</td>*/}
+                                            {console.log(Date.parse(s.release))}
+                                            <td><FormattedDate value={new Date(s.release.split("/")[2],s.release.split("/")[1],s.release.split("/")[0])} month="numeric" month="long" day="numeric" weekday="long" year="numeric"/></td>
                                         </tr>
                                     ))}
                                 </tbody>
