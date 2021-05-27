@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { FormattedMessage} from "react-intl";
 
 const SerieDetail=(props)=>{
-    const [state, setstate] = useState(props.info);
+    const [state] = useState(props.info);
     return(
         <Card>
             <Card.Body>

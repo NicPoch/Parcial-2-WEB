@@ -146,13 +146,13 @@ const Series=()=>{
                                 </thead>
                                 <tbody>
                                     {series.map(s=>(
-                                        <tr onClick={()=>(!onDetail || onDetail.id!==s.id) ? toDetail(s):setonDetail(null)}>
+                                        <tr key={s.id} onClick={()=>(!onDetail || onDetail.id!==s.id) ? toDetail(s):setonDetail(null)}>
                                             <td>{s.id}</td>
                                             <td>{s.name}</td>
                                             <td>{s.channel}</td>
                                             <td>{s.seasons}</td>
                                             <td>{s.episodes}</td>
-                                            <td><FormattedDate value={new Date(s.release.split("/")[2],s.release.split("/")[1],s.release.split("/")[0])} month="numeric" month="long" day="numeric" weekday="long" year="numeric"/></td>
+                                            <td><FormattedDate value={new Date(s.release.split("/")[2],s.release.split("/")[1],s.release.split("/")[0])} month="numeric" month="long" day="numeric" weekday="long" year="numeric" key={s.id}/></td>
                                         </tr>
                                     ))}
                                 </tbody>
