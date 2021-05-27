@@ -152,7 +152,7 @@ const Series=()=>{
                                             <td>{s.channel}</td>
                                             <td>{s.seasons}</td>
                                             <td>{s.episodes}</td>
-                                            <td><FormattedDate value={new Date(s.release.split("/")[2],s.release.split("/")[1],s.release.split("/")[0])} month="numeric" month="long" day="numeric" weekday="long" year="numeric" key={s.id}/></td>
+                                            <td><FormattedDate value={new Date(s.release.split("/")[2],s.release.split("/")[1],s.release.split("/")[0])} month="numeric"  day="numeric" weekday="long" year="numeric" key={s.name}/></td>
                                         </tr>
                                     ))}
                                 </tbody>
